@@ -6,16 +6,40 @@
 //  Copyright (c) 2013 admin. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "AppDelegate.h" 
 
 @implementation AppDelegate
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+  
+    UIViewController *viewController=[[UIViewController alloc]init];
+    viewController.title=@"Test";
+    
+    UINavigationController *navigationController=[[UINavigationController alloc]initWithRootViewController:viewController];
+     self.window.rootViewController = navigationController;
+
+  [navigationController.view setBackgroundColor:[UIColor yellowColor]];
     self.window.backgroundColor = [UIColor whiteColor];
+ [viewController.view setBackgroundColor:[UIColor blueColor]];
+    
+ 
+    
+
+         UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(closeView:)];
+    viewController.navigationItem.leftBarButtonItem=leftButton;
+ 
+
+      [self.navigationController presentModalViewController:viewController animated:YES];
+   
+
+    
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
@@ -44,6 +68,11 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+- (IBAction)closeView:(id)sender {
+    [self.navigationController
+     dismissModalViewControllerAnimated:YES];
+
 }
 
 @end
